@@ -79,3 +79,6 @@ def test_did_survive_infection():
         # the values of each attribute for a Person who did not survive
         # assert ...
         pass
+
+test_vacc_person_instantiation()
+test_not_vacc_person_instantiation()
