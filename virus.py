@@ -11,17 +11,19 @@ class Virus(object):
 # Testing virus class
 
 def test_virus_instantiation():
-    #TODO: Create your own test that models the virus you are working with
-    ''' Check to make sure that the virus instantiator is working. '''
-    virus = Virus('HIV', 0.35, 0.8)
-    assert virus.name == 'HIV'
-    assert virus.repro_rate == 0.35
-    assert virus.mortality_rate == 0.8
+    virus = Virus("HIV", 0.8, 0.3)
+    assert virus.name == "HIV"
+    assert virus.repro_rate == 0.8
+    assert virus.mortality_rate == 0.3
 
-    my_virus = Virus('Pnuemonia', 0.3, 0.5)
-    assert my_virus.name == 'Pnuemonia'
-    assert my_virus.repro_rate == 0.3
-    assert my_virus.mortality_rate == 0.5
+def test_virus_instantiation():
+    virus = Virus("Dysentery", 0.3, 0.4)
+    assert virus.name == "Dysentery"
+    assert virus.repro_rate == 0.3
+    assert virus.mortality_rate == 0.4
 
-if __name__ == '__main__':
-    test_virus_instantiation()
+def test_virus_instantiation():
+    virus = Virus("Fever", 0.98, 0.02)
+    assert virus.name == "Fever"
+    assert virus.repro_rate == 0.98
+    assert virus.mortality_rate == 0.02
