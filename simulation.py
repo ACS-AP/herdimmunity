@@ -56,18 +56,23 @@ class Simulation(object):
 
     def run(self):
         
-        time_step_counter = 0
-        should_continue = None
-
-        while should_continue:
-            # TODO: for every iteration of this loop, call self.time_step() to compute another
-            # round of this simulation.
-            print(f'The simulation has ended after {time_step_counter} turns.')
-            pass
+        while self._simulation_should_continue() == True:
+            self.time_step()
+            self.current_infected = []
+            self._infect_newly_infected()
+            self.logger.log_time_step(len(self.newly_infected), self.newly_dead, self.total_infected, self.total_dead, self.total_immune, len(self.population), self.herd_immunity)
+            self.newly_infected = []
+            self.newly_dead = 0
+            print(f'Population: {len(self.population)}')
 
     def time_step(self):
         
-        pass
+        for person in self.current_infected:
+            print(f'Infected: {person._id}')
+
+            random_people = random.sample(self.population, self.avg_interactions)
+            for random_person in random_people:
+                self.interaction(person, random_person)
 
     def interaction(self, person, random_person):
         
