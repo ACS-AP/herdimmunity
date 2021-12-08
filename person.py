@@ -15,22 +15,15 @@ class Person(object):
         self.infection = infection  # Virus object or None
 
     def did_survive_infection(self):
-        ''' 
-        Generates random number and compares to mortality_rate.
-        If random number is smaller, person dies.
-        Else person survives, becomes vaccinated and has no infection.
-        Returns boolean value indicating survival.
-        '''
-        # Only called if infection attribute is not None.
-        if self.infection != None:
-            randNum = random.random()
-            if randNum > virus.mortality_rate:
-                self.is_vaccinated = True
-                self.infection = None
-                return True
-            else:
+        if self.virus: 
+            died = random.random()
+            if died < self.virus.died:
+                print(f'{self._id} has Died :(')
                 self.is_alive = False
                 return False
+            else:
+                self.virus = None
+                return True
 
 # -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
 # Testing person class
