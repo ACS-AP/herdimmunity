@@ -84,26 +84,17 @@ class Simulation(object):
 
     def _infect_newly_infected(self):
         
-        pass
-
-if __name__ == "__main__":
-    params = sys.argv[1:]
-
-    name = str(params[0])
-    pop_size = int(params[1])
-    repro_rate = float(params[2])
-    mortality_rate = float(params[3])
-    num_vaccinated = int(params[4])
-
-    if len(params) == 6:
-        initial_infected = int(params[5])
-    else:
-        initial_infected = 1
-
-    virus = Virus(name, repro_rate, mortality_rate)
-    # python3 simulation.py Ebola 100 0.9 0.7 25 1
-    # python3 simulation.py Ebola 100000 0.9 0.7 25000 10
-    sim = Simulation(virus, pop_size, num_vaccinated, initial_infected)
-
-    sim.run()
-    print(sim.pop_size)
+        for sick_person in self.newly_infected:
+            sick_person.virus = self.virus
+            if sick_person.did_survive_infection():
+                print(f'{sick_person._id} is Infected.')
+                self.logger.log_infection_survival(sick_person)
+                self.current_infected.append(sick_person)
+                self.total_immune += 1
+                
+            else:
+                self.logger.log_infection_survival(sick_person, True)
+                self.population.remove(sick_person)
+                self.newly_dead += 1
+                self.total_dead += 1
+                print(f'{sick_person._id} has Died')     

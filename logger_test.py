@@ -1,1 +1,0 @@
-#file should be created that allows for the testing of the logger class.
