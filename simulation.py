@@ -76,11 +76,28 @@ class Simulation(object):
 
     def interaction(self, person, random_person):
         
+        print(f'{person._id} Interacts with {random_person._id}')
         assert person.is_alive == True
         assert random_person.is_alive == True
 
-       
-        pass
+        if random_person.is_vaccinated:
+            self.logger.log_interaction(person, random_person)
+        elif random_person.natural_immunity:
+            self.logger.log_interaction(person, random_person)
+        elif random_person.virus != None:
+            self.logger.log_interaction(person, random_person)
+        elif random_person.is_vaccinated == False and random_person.natural_immunity == False:
+            bad_luck = random.random()
+            if bad_luck < self.virus.repro_rate:
+                if any(x._id == random_person._id for x in self.newly_infected) == False:
+                    print(f'{random_person._id} now Infected')
+                    self.logger.log_interaction(person, random_person, True)
+                    self.total_infected += 1
+                    self.newly_infected.append(random_person)
+                else:
+                    print('---Infection Caught---')
+            else:
+                self.logger.log_interaction(person,random_person)
 
     def _infect_newly_infected(self):
         
