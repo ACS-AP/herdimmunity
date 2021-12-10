@@ -7,4 +7,4 @@ def check(prompt='', type=int):
             print(f'Invalid! --- Should be {type}.')
             continue
         else:
-            return 
+            return user_input
