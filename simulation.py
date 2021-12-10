@@ -54,17 +54,17 @@ class Simulation(object):
     def _simulation_should_continue(self):
         
         if self.total_immune >= (self.herd_immunity* len(self.population)):
-            print('Herd Immunity has been achieved.')
+            print('HERD IMMUNITY ACHIEVED')
             self.conclusion = 'herd immunity'
             self.logger.Final_data(self.conclusion, self.total_dead, len(self.population), self.total_immune)
             return False
         elif len(self.current_infected) == 0:
-            print('There are no more active infections.')
+            print('NO MORE INFECTIONS')
             self.conclusion = 'no infections'
             self.logger.Final_data(self.conclusion, self.total_dead, len(self.population), self.total_immune)
             return False
         elif len(self.population) == 0:
-            self.logger.Final_data('everyone died', self.total_dead, len(self.population), self.total_immune)
+            self.logger.Final_data('EVERYONE DEAD', self.total_dead, len(self.population), self.total_immune)
         else:
             return True
 
@@ -73,7 +73,7 @@ class Simulation(object):
     
         step_num = 1
         while self._simulation_should_continue() == True:
-            print(f'----------IME STEP {step_num}-----------')
+            print(f'----------TIME STEP {step_num}-----------')
             self.time_step()
             self.current_infected = []
             self._infect_newly_infected()
@@ -119,7 +119,6 @@ class Simulation(object):
                     print('Clone')
             else:
                 self.logger.log_interaction(person,random_person)
-
 
 
 
